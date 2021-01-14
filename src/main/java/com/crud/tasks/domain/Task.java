@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @NoArgsConstructor
-@Getter
 @AllArgsConstructor
+@Getter
 @Entity(name = "tasks")
 public class Task {
     @Id
@@ -22,5 +22,5 @@ public class Task {
     private String title;
 
     @Column(name = "description")
-    private  String content;
+    private String content;
 }
