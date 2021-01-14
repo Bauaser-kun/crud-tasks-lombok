@@ -1,0 +1,8 @@
+1. Z jakiej bazy korzysta Twoja aplikacja?
+
+2. Jakich bibliotek używasz w swoim projekcie?
+
+3. Z jakich metod HTTP korzysta Twoja aplikacja?
+
+Stworzona aplikacja korzysta z bazy danych MySQL z wykorzystaniem bibliotek spring framework, lombok, hibernate, javax persistance.
+aplikacja korzysta z metod HTTP (REST-API), do tej pory zastosowane metody to GET, PUT, POST, DELETE.
