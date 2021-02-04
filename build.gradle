@@ -11,12 +11,19 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
+	jcenter()
 	mavenCentral()
 }
 
 dependencies {
+	implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+	implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.5.15'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -24,6 +31,10 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok:1.18.16'
 	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.16'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
