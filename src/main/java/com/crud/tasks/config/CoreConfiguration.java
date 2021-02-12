@@ -2,6 +2,7 @@ package com.crud.tasks.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.PathSelectors;
@@ -12,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
+@EnableScheduling
 public class CoreConfiguration {
 
     @Bean
