@@ -30,11 +30,29 @@ class SimpleEmailServiceTest {
     mailMessage.setTo(mail.getMailTo());
     mailMessage.setSubject(mail.getSubject());
     mailMessage.setText(mail.getMessage());
+    mailMessage.setCc(mail.getToCc());
 
     //When
     service.send(mail);
 
     //Then
     verify(mailSender, times(1)).send(mailMessage);
+    }
+
+    @Test
+    public void shouldSendEmailWithoutCc(){
+        //Given
+        Mail mail = new Mail("test@tes.com", "Test", "Test Message", null);
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+
+        //When
+        service.send(mail);
+
+        //Then
+        verify(mailSender, times(1)).send(mailMessage);
     }
 }
