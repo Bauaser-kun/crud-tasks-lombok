@@ -120,4 +120,19 @@ public class TrelloMapperTestSuite {
         assertEquals(card.getListId(), testCard.getListId());
 
     }
+
+    @Test
+    void testMapToBoard(){
+        //Given
+        List<TrelloListDto> lists = new ArrayList<>();
+        lists.add(new TrelloListDto("1", "List", true));
+        TrelloBoardDto dto = new TrelloBoardDto("1", "Board", lists);
+
+        //When
+        TrelloBoard board = mapper.mapToBoard(dto);
+
+        //Then
+        assertEquals(board.getLists().size(), 1);
+        assertEquals(board.getName(), "Board");
+    }
 }
