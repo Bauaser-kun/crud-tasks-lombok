@@ -1,4 +1,4 @@
-package com.crud.tasks.trello.facade;
+package com.crud.tasks.trello.mapper;
 
 import com.crud.tasks.domain.TrelloBoard;
 import com.crud.tasks.domain.TrelloCard;
@@ -21,12 +21,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TrelloFacadeTestSuite {
+public class TrelloMapperTestSuite {
     @Autowired
     private TrelloMapper mapper;
 
     @Test
-    public void testMapToBoards(){
+    void testMapToBoards(){
         //Given
         List<TrelloBoardDto> dtos = new ArrayList<>();
         List<TrelloListDto> lists = new ArrayList<>();
@@ -43,7 +43,7 @@ public class TrelloFacadeTestSuite {
     }
 
     @Test
-    public void testMapToBoardsDto(){
+    void testMapToBoardsDto(){
         //Given
         List<TrelloBoard> boards = new ArrayList<>();
         List<TrelloList> lists = new ArrayList<>();
@@ -60,7 +60,7 @@ public class TrelloFacadeTestSuite {
     }
 
     @Test
-    public void testMapToList(){
+    void testMapToList(){
         //Given
         List<TrelloListDto> lists = new ArrayList<>();
         lists.add(new TrelloListDto("1", "List", true));
@@ -75,7 +75,7 @@ public class TrelloFacadeTestSuite {
     }
 
     @Test
-    public void testMapToListDto(){
+    void testMapToListDto(){
         //Given
         List<TrelloList> lists = new ArrayList<>();
         lists.add(new TrelloList("1", "List", true));
@@ -90,7 +90,7 @@ public class TrelloFacadeTestSuite {
     }
 
     @Test
-    public void testMapToCard(){
+    void testMapToCard(){
         //Given
         TrelloCardDto card = new TrelloCardDto("card", "description", "top", "1");
 
@@ -106,7 +106,7 @@ public class TrelloFacadeTestSuite {
     }
 
     @Test
-    public void testMapToCardDto(){
+    void testMapToCardDto(){
         //Given
         TrelloCard card = new TrelloCard("card", "description", "top", "1");
 
