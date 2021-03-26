@@ -95,9 +95,30 @@ public class TaskControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("mapped content")));
     }
 
-//    @Test
-    /*deleteTask
+    @Test
+    void shouldCreateTask() throws Exception{
+        //Given
+        Task task = new Task(1L, "Test task", "something or other");
+        TaskDto dto = new TaskDto(1L, "mapped task", "mapped content");
+        when(mapper.mapToTask(dto)).thenReturn(task);
+        when(service.saveTask(task)).thenReturn(task);
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(dto);
 
-    createTask*/
-
-}
+        //When & Then
+        mockMvc.perform(MockMvcRequestBuilders
+        .post("/v1/task/createTask")
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding("UTF-8")
+        .content(jsonContent))
+                .andExpect(MockMvcResultMatchers.status().is(200));
+    }
+    @Test
+    public void testDeleteTask() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/v1/task/deleteTask")
+                .param("taskId","1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+   }
