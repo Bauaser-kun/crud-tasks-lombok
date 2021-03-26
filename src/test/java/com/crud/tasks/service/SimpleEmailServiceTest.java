@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.appObjects.Mail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,9 @@ class SimpleEmailServiceTest {
 
     @Mock
     private JavaMailSender mailSender;
+
+    @Mock
+    AdminConfig config;
 
     @Test
     public void shouldSendEmail(){
@@ -54,5 +58,6 @@ class SimpleEmailServiceTest {
 
         //Then
         verify(mailSender, times(1)).send(mailMessage);
+        assertEquals(mailMessage.getFrom(), config.getAdminMail());
     }
 }
