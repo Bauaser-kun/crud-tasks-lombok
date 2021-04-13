@@ -39,6 +39,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.16'
 	testCompileOnly 'org.projectlombok:lombok:1.18.16'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	compile('io.springfox:springfox-swagger2:2.9.2')
 	compile('io.springfox:springfox-swagger-ui:2.9.2')
