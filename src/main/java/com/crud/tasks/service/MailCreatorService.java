@@ -49,6 +49,7 @@ public class MailCreatorService {
     private String previewMessage(String message) {
         String[] words = message.split(" ");
         return words[0] + " " + words[1] + " " + words[2] + words[3] + words[4] +"(...)";
+        //
     }
 
     public String buildDailyUpdateMail(String message) {
