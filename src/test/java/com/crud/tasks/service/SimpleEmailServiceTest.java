@@ -25,7 +25,7 @@ class SimpleEmailServiceTest {
     @Mock
     AdminConfig config;
 
-    /*@Test
+    @Test
     public void shouldSendEmail(){
     //Given
     Mail mail = new Mail("test@tes.com", "Test", "Test Message", "TestCC");
@@ -59,5 +59,5 @@ class SimpleEmailServiceTest {
         //Then
         verify(mailSender, times(1)).send(mailMessage);
         assertEquals(mailMessage.getFrom(), config.getAdminMail());
-    }*/
+    }
 }

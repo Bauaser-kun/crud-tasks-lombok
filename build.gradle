@@ -32,9 +32,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	 //runtimeOnly 'mysql:mysql-connector-java'
+	 runtimeOnly 'mysql:mysql-connector-java'
 
-	runtimeOnly 'org.postgresql:postgresql'
+	//runtimeOnly 'org.postgresql:postgresql'
 	compileOnly 'org.projectlombok:lombok:1.18.16'
 	annotationProcessor 'org.projectlombok:lombok:1.18.16'
 	testCompileOnly 'org.projectlombok:lombok:1.18.16'
