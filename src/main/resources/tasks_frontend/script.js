@@ -1,6 +1,6 @@
 $(document).ready(function() {
    const apiRoot = 'https://ancient-fjord-81292.herokuapp.com/v1/';
-   const trelloApiRoot = 'https://ancient-fjord-81292.herokuapp.com/v1/trello';
+   const trelloApiRoot = 'https://ancient-fjord-81292.herokuapp.com/v1/trello/';
    const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
    const $tasksContainer = $('[data-tasks-container]');
 
