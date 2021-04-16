@@ -4,20 +4,25 @@ import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.appObjects.Mail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SimpleEmailServiceTest {
     @InjectMocks
-    private SimpleEmailService service;
+    private SimpleEmailService simpleEmailService;
+
+    @Mock
+    private MailCreatorService mailCreatorService;
 
     @Mock
     private JavaMailSender mailSender;
@@ -25,22 +30,30 @@ class SimpleEmailServiceTest {
     @Mock
     AdminConfig config;
 
+    @Captor
+    private ArgumentCaptor<MimeMessagePreparator> captureMessage;
+
+    @Captor
+    private ArgumentCaptor<MimeMessagePreparator> captureMessageWithoutCC;
+
     @Test
     public void shouldSendEmail(){
     //Given
-    Mail mail = new Mail("test@tes.com", "Test", "Test Message", "TestCC");
+        Mail mail = new Mail("test@tes.com", "Test", "Test Message", "TestCC");
 
-    SimpleMailMessage mailMessage = new SimpleMailMessage();
-    mailMessage.setTo(mail.getMailTo());
-    mailMessage.setSubject(mail.getSubject());
-    mailMessage.setText(mail.getMessage());
-    mailMessage.setCc(mail.getToCc());
+        MimeMessagePreparator mailMessage = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mail.getMessage(), true);
+            messageHelper.setCc(mail.getToCc());
+        };
 
     //When
-    service.send(mail);
+    simpleEmailService.send(mail);
 
     //Then
-    verify(mailSender, times(1)).send(mailMessage);
+    verify(mailSender, times(1)).send(captureMessage.capture());
     }
 
     @Test
@@ -48,16 +61,17 @@ class SimpleEmailServiceTest {
         //Given
         Mail mail = new Mail("test@tes.com", "Test", "Test Message", null);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
+        MimeMessagePreparator mailMessage = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mail.getMessage(), true);
+        };
 
         //When
-        service.send(mail);
+        simpleEmailService.send(mail);
 
         //Then
-        verify(mailSender, times(1)).send(mailMessage);
-        assertEquals(mailMessage.getFrom(), config.getAdminMail());
+        verify(mailSender, times(1)).send(captureMessageWithoutCC.capture());
     }
 }
